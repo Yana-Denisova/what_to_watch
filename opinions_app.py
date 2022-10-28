@@ -26,7 +26,20 @@ def index_view():
         return 'В базе данных мнений о фильмах нет.'
     offset_value = randrange(quantity)
     opinion = Opinion.query.offset(offset_value).first()
-    return render_template('index.html', opinion=opinion)
+    return render_template('opinion.html', opinion=opinion)
+
+@app.route('/add')
+def add_opinion_view():
+    return render_template('add_opinion.html')
+
+# Тут указывается конвертер пути для id
+@app.route('/opinions/<int:id>')  
+# Параметром указывается имя переменной
+def opinion_view(id):  
+    # Теперь можно запрашивать мнение по id
+    opinion = Opinion.query.get(id)  
+    # И передавать его в шаблон
+    return render_template('opinion.html', opinion=opinion)
 
 if __name__ == '__main__':
     app.run()
