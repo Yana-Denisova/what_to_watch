@@ -19,15 +19,24 @@
           {{ form.source(class="form-control form-control-lg py-3 mb-3", placeholder=form.source.label.text) }}
           <p></p>
           {{ form.text(class="form-control form-control-lg py-3 mb-3", placeholder=form.text.label.text, rows="3", cols="40")}}
-          <p class="text-danger">
+          <p>
             {% if form.text.errors %}
               {% for error in form.text.errors %}
-                {{ error }}
+                <span style="color: red">{{ error }}</span>
               {% endfor %}
             {% endif %}
           </p>
           {{ form.submit(class="button px-5 py-3 btn") }}
         </form>
+        <p class="py-3 mb-3">
+          {% with messages = get_flashed_messages() %}
+            {% if messages %}
+              {% for message in messages %}
+                {{ message }}
+              {% endfor %}
+            {% endif %}
+          {% endwith %}
+        </p>
       </div>
     </div>
   </section>
